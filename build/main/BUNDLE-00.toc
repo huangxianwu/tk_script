@@ -1,0 +1,3 @@
+([('main',
+   '/Users/winston/Desktop/Gitlab/repository/tk/tk_script/dist/main',
+   'EXECUTABLE')],)
