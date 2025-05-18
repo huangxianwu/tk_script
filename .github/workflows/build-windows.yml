@@ -22,13 +22,23 @@ jobs:
 
     - name: 安装依赖
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip==24.0
         pip install -r requirements.txt
         pip install pyinstaller
 
+    - name: 清理旧的构建文件
+      run: |
+        rmdir /s /q build
+        rmdir /s /q dist
+        del main.spec
+
     - name: 打包为 EXE
       run: |
-        pyinstaller --onefile --windowed main.py
+        pyinstaller --onefile --windowed main.py ^
+          --hidden-import=sqlalchemy_mate ^
+          --hidden-import=uszipcode ^
+          --hidden-import=pytz ^
+          --hidden-import=sqlalchemy
 
     - name: 上传构建产物
       uses: actions/upload-artifact@v4
