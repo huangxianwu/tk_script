@@ -28,9 +28,8 @@ jobs:
 
     - name: 清理旧的构建文件
       run: |
-        rmdir /s /q build
-        rmdir /s /q dist
-        del main.spec
+        Remove-Item -Recurse -Force build, dist
+        if (Test-Path main.spec) { Remove-Item -Force main.spec }
 
     - name: 打包为 EXE
       run: |
